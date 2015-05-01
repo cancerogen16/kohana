@@ -1,11 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Main extends Mycontroller {
+class Controller_Page extends Mycontroller {
 	
 	public $template = "basic";
 	
 	public function action_index()
 	{
-		$this->template->content = View::factory('home');
+		$this->template->content = View::factory('pageview');
 	}
-} // End Main
+} // End Page

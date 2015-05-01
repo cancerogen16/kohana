@@ -7,25 +7,28 @@ class Controller_Auth extends Controller_Template {
 	public function action_index()
 	{
 		$auth = Auth::instance();
+		$data = array();
 		
 		if ($auth->logged_in()) {
-				
+			HTTP::redirect();		
 		} else {
-					
+			if (isset($_POST['btnsubmit'])) {
+				$login = Arr::get($_POST,'login','');
+				$password = Arr::get($_POST,'password','');	
+				
+				if ($auth->login($login, $password)) {
+					$session = Session::instance();
+					$auth_redirect = $session->get('auth_redirect','');
+					$session->delete('auth_redirect');
+		
+					HTTP::redirect($auth_redirect);	
+				} else {
+					$data["error"] = 1;	
+				}
+			}			
 		}
 		
-		if (isset($_POST['btnsubmit'])) {
-			$login = Arr::get($_POST,'login','');
-			$password = Arr::get($_POST,'password','');	
-			
-			if ($auth->login($login, $password)) {
-				$data["error"] = 0;	
-			} else {
-				$data["error"] = 1;	
-			}
-			
-			
-		} 
+		 
 		
 		
 		$this->template->content = View::factory('authview',$data);
