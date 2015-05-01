@@ -30,3 +30,4 @@ _ReSharper*/
 *.dll
 application/cache/*
 application/logs/*
+*.project
