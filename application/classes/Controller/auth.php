@@ -73,22 +73,18 @@ class Controller_Auth extends Controller_Template {
         $this->template->content = View::factory('rempassview', $data);
     }
 	
-	public function action_checkcode() {
+    public function action_checkcode() {
+        
+        $code = $this->request->param('id');
         $data = array();
-
-        $btnsubmit = filter_input(INPUT_POST, "btnsubmit", FILTER_SANITIZE_SPECIAL_CHARS);
-
-        if ($btnsubmit) {
-            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
-
-            $register = new Model_register();
-
-            if ($register->hochuNoviyParol($email)) {
-                $data["ok"] = "";
-            } else {
-                $data["error"] = "";
-            }
-        }
+        
+        $register = new Model_register();
+		
+		if ($register->obnovlenieparolia($code)) {
+			$data["ok"] = "";	
+		} else {
+			$data["error"] = "";	
+		}
 
         $this->template->content = View::factory('checkcodeview', $data);
     }
