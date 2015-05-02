@@ -77,8 +77,9 @@ class Model_Register {
         $usertemp->save();
 
         $from = 'don544@mail.ru';
-        $subject = 'Восстановление пароля';
-        $message = "Перейдите по : <a href='http://kohana/auth/checkcode/$genpass' >ссылке</a>";
+        $subject = Kohana::message('reg', 'subject');
+        $data = array('genpass' => $genpass);
+        $message = View::factory('email/emailviews', $data);
         $useful->sendemail($email, $from, $subject, $message, TRUE);
 
         return TRUE;
