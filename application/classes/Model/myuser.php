@@ -18,12 +18,27 @@ class Model_Myuser extends ORM
 	
 	public function username_unique($username)
 	{
-		$usertemp = ORM::factory('myuser', array('username' => $username));
+		$db = Database::instance();
 		
-		if ($usertemp->loaded()) {
-			return FALSE;
+		if ($this->id) {
+			$query = 
+				'SELECT id
+				FROM users
+				WHERE id != '.$this->id.' AND username = '.$db->escape($username);
+			
 		} else {
-			return TRUE;
+			$query = 
+				'SELECT id
+				FROM users
+				WHERE username = '.$db->escape($username);
+		}
+		
+		$result = $db->query(Database::SELECT,$query,FALSE)->as_array();
+        
+		if (count($result) > 0) {
+			return FALSE;	
+		} else {
+			return TRUE;	
 		}
 	}
 	

@@ -31,3 +31,4 @@ _ReSharper*/
 application/cache/*
 application/logs/*
 *.project
+/nbproject/private/
