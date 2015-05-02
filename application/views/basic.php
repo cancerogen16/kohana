@@ -16,6 +16,7 @@
 				<a href="/admin/main/">Админка</a>
 				<a href="/auth/reg/">Регистрация</a>
 				<a href="/auth/hpass/">Создать пароль</a>
+                                <a href="/auth/hpass/">Создать пароль</a>
 				<!-- end .header -->
 			</div>
 			<div id="content">
