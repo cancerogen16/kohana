@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1f68120-be51-44cf-b45f-9bbae5982e4f" name="Default" comment="восстановление пароля 2">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/classes/Model/register.php" afterPath="$PROJECT_DIR$/application/classes/Model/register.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/classes/Model/useful.php" afterPath="$PROJECT_DIR$/application/classes/Model/useful.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f1f68120-be51-44cf-b45f-9bbae5982e4f" name="Default" comment="восстановление пароля 2" />
     <ignored path="kohana.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
