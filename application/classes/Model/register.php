@@ -64,23 +64,53 @@ class Model_Register {
 
     public function hochuNoviyParol($email) {
         $usertemp = ORM::factory('myuser', array('username' => $email));
-        
-        if(!$usertemp->loaded()) {
+
+        if (!$usertemp->loaded()) {
             return FALSE;
         }
-        
+
         // Генерируем пароль
         $useful = new Model_Useful();
         $genpass = $useful->generatePassword(18);
-        
+
         $usertemp->rempass = $genpass;
         $usertemp->save();
-        
+
         $from = 'don544@mail.ru';
         $subject = 'Восстановление пароля';
-        $message = "Перейдите по : <a href='auth/checkcode/$genpass' >ссылке</a>";
+        $message = "Перейдите по : <a href='http://kohana/auth/checkcode/$genpass' >ссылке</a>";
         $useful->sendemail($email, $from, $subject, $message, TRUE);
-        
+
+        return TRUE;
+    }
+
+    public function obnovlenieparolia($code) {
+        $usertemp = ORM::factory('myuser', array('rempass' => $code));
+
+        if (!$usertemp->loaded()) {
+            return FALSE;
+        }
+
+        $useful = new Model_Useful();
+        $genpass = $useful->generatePassword(8);
+
+        //Хеширование пароля
+        $auth = Auth::instance();
+        $usertemp->password = $auth->hash_password($genpass);
+
+        //Очистка кода восстановления
+        $usertemp->rempass = NULL;
+
+        $usertemp->save();
+
+        //Отправка эл. почты
+        $email = $usertemp->username;
+
+        $from = 'don544@mail.ru';
+        $subject = 'Авторизационные данные обновлены';
+        $message = "Ваш логин: $email Ваш пароль: $genpass";
+        $useful->sendemail($email, $from, $subject, $message, FALSE);
+
         return TRUE;
     }
 
