@@ -11,6 +11,11 @@
 		<div id="container">
 			<div id="header">
 				<h1>Образовательная система</h1>
+				<a href="/auth/">Войти</a>
+				<a href="/auth/logout">Выйти</a>
+				<a href="/admin/main/">Админка</a>
+				<a href="/auth/reg/">Регистрация</a>
+				<a href="/auth/hpass/">Создать пароль</a>
 				<!-- end .header -->
 			</div>
 			<div id="content">

@@ -1,7 +1,7 @@
 <?php  
 if (isset($errors)) {
 	
-	foreach ($errors as $key => $error) {
+	foreach ($errors as $error) {
 		echo '<p style="color:red">'.$error.'</p>';		
 	}
 } 

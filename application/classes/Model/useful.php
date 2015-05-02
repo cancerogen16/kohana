@@ -32,11 +32,11 @@ class Model_Useful
 		return $pass;
   	}
 
-    public function sendemail($to, $from, $subject, $message)
+    public function sendemail($to, $from, $subject, $message, $html = false)
     {
         try
         {
-            $count = Email::send($to, $from, $subject, $message, $html = false);
+            $count = Email::send($to, $from, $subject, $message, $html);
             return TRUE;
         }
         catch (Exception $e)

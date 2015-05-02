@@ -27,4 +27,11 @@ class Model_Regcode extends ORM
 			return FALSE;
 		}
 	}
+	
+	public function disactive_code($code, $user_id)
+	{
+		$regcodetemp = ORM::factory('regcode', array('code' => $code));
+		$regcodetemp->user_id = $user_id;
+		$regcodetemp->save();
+	}
 }

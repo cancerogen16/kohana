@@ -28,9 +28,6 @@ class Controller_Auth extends Controller_Template {
 			}			
 		}
 		
-		 
-		
-		
 		$this->template->content = View::factory('authview',$data);
 	}
 	

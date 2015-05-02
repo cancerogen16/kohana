@@ -27,7 +27,8 @@ return array(
 	 */
 	//'options' => NULL
 	'options' => array('hostname' => 'smtp.mail.ru',
-					   'username' => 'obrsistema@mail.ru',
-					   'password' => 'sistemaobr',
-					   'port'     => '25'),
+					   'username' => 'don544@mail.ru',
+					   'password' => 'dezavuar16',
+					   'encryption' => 'tls',
+					   'port'     => '465'),
 );

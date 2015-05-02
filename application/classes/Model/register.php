@@ -3,7 +3,13 @@
 class Model_Register
 {
 
-	public function reg($email, $regcodevalue, $role)	
+    /**
+     * @param $email
+     * @param $regcodevalue
+     * @param $role
+     * @return bool
+     */
+    public function reg($email, $regcodevalue, $role)
 	{
 		$regcode = new Model_Regcode();
 		$myuser = new Model_Myuser();
@@ -39,15 +45,19 @@ class Model_Register
 			$usertemp = ORM::factory('myuser', array('username'=>$email));
 			$adduserid = $usertemp->id;
 			
+			//Сохранение роли
 			$addrole = new Model_Addrole();
 			$addrole->user_id = $adduserid;
 			$addrole->role_id = $role;
 			$addrole->save();
 			
-			$from = 'obrsistema@mail.ru';
+			//Дизактивация кода
+			$regcode->disactive_code($regcodevalue, $adduserid);
+			
+			$from = 'don544@mail.ru';
 			$subject = 'Регистрация в образовательной системе';
-			$message = "Ваш логин:  $email Ваш пароль:  $genpass";
-			$useful->sendemail($email, $from, $subject, $message);
+			$message = "Ваш логин:  $email <br />Ваш пароль:  $genpass";
+			$useful->sendemail($email, $from, $subject, $message, TRUE);
 			
 			return TRUE;
 		}
