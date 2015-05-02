@@ -76,6 +76,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	padding: 5px;
 }
 
+#reg-form{
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #FF8F8F;	
+}
+
 #empty{
 	height: 40px;
 }

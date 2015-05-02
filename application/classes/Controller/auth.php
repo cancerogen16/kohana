@@ -34,6 +34,27 @@ class Controller_Auth extends Controller_Template {
 		$this->template->content = View::factory('authview',$data);
 	}
 	
+	public function action_reg()
+	{
+		$data = array();
+		
+		if (isset($_POST['btnsubmit'])) {
+			$email = Arr::get($_POST,'email','');
+			$regcodevalue = Arr::get($_POST,'regcodevalue','');	
+			
+			$register = new Model_register();
+			
+			if ($register->reg($email, $regcodevalue)) {
+				
+				$data["error"] = 0;	
+			} else {
+				$data["error"] = 1;	
+			}
+		}	
+			
+		$this->template->content = View::factory('regview',$data);
+	}
+	
 	public function action_hpass()
 	{
 		$auth = Auth::instance();
