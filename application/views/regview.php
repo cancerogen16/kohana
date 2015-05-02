@@ -1,10 +1,13 @@
 <?php  
-if (isset($error)) {
-	if ($error) {
-		echo '<p style="color:red">Ошибка регистрации</p>';	
-	} else {
-		echo '<p style="color:green">Регистрация успешна</p>';
+if (isset($errors)) {
+	
+	foreach ($errors as $key => $error) {
+		echo '<p style="color:red">'.$error.'</p>';		
 	}
+} 
+
+if (isset($regok)) {
+	echo '<p style="color:green">Регистрация успешна</p>';	
 } 
 ?>
 

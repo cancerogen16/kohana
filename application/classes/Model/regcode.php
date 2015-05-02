@@ -2,5 +2,29 @@
 
 class Model_Regcode extends ORM 
 {
-
+	public function rules()
+	{
+		return array(
+			'code' => array(
+				array('not_empty'),
+				array(array($this, 'bad_code')),
+			),
+		);
+	}
+	
+	public function bad_code($code)
+	{
+		$regcodetemp = ORM::factory('regcode', array('code' => $code));
+		
+		if ($regcodetemp->loaded()) {
+			if ($regcodetemp->user_id == NULL) {
+				return TRUE;	
+			} else {
+				return FALSE;	
+			}
+		} 
+		else {
+			return FALSE;
+		}
+	}
 }

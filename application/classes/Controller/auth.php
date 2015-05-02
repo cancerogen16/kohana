@@ -44,11 +44,10 @@ class Controller_Auth extends Controller_Template {
 			
 			$register = new Model_register();
 			
-			if ($register->reg($email, $regcodevalue)) {
-				
-				$data["error"] = 0;	
+			if ($register->reg($email, $regcodevalue, 1)) {
+				$data["regok"] = "";	
 			} else {
-				$data["error"] = 1;	
+				$data["errors"] = $register->errors;	
 			}
 		}	
 			
@@ -59,7 +58,6 @@ class Controller_Auth extends Controller_Template {
 	{
 		$auth = Auth::instance();
 		$hash = $auth->hash_password('admin'); 
-		
 		
 		$this->template->content = $hash;
 	}
