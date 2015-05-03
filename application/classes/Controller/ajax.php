@@ -10,7 +10,14 @@ class Controller_Ajax extends Controller {
         $res = $myuser->username_unique($email);
         echo json_encode(array('result' => $res));
     }
+    
+    public function action_checkOldPass() {
+        $oldpass = filter_input(INPUT_POST, "oldpass", FILTER_SANITIZE_SPECIAL_CHARS);
+        $myuser = new Model_Myuser();
+        $res = $myuser->checkOldPass($oldpass);
+        echo json_encode(array('result' => $res));
+    }
 
 }
 
-// End Main
+// End Ajax

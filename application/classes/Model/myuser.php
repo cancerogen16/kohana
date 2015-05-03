@@ -5,7 +5,8 @@ defined('SYSPATH') or die('No direct script access.');
 class Model_Myuser extends ORM {
 
     protected $_table_name = 'users';
-
+    protected $errors = array();
+    
     public function rules() {
         return array(
           'username' => array(
@@ -38,5 +39,50 @@ class Model_Myuser extends ORM {
             return TRUE;
         }
     }
+    
+    public function displayusername(){
+        $auth = Auth::instance();
+        $user_id = $auth->get_user();
+        
+        $usertemp = ORM::factory('myuser', array('id' => $user_id));
+        return $usertemp->username;
+    }
+    
+    public function checkOldPass($oldpass){
+        $auth = Auth::instance();
+        return $auth->check_password($oldpass);
+    }
+    
+    public function saveNewPass($oldpass,$newpass1,$newpass2){
+        $vData = array('oldpass'=>$oldpass,'newpass1'=>$newpass1,'newpass2'=>$newpass2);
+        
+        $validation = Validation::factory($vData);
+        $validation->rule('oldpass', 'not_empty');
+        $validation->rule('oldpass', 'alpha_numeric');
+        $validation->rule('oldpass', array($this, 'checkOldPass'));
+        
+        $validation->rule('newpass1', 'not_empty');
+        $validation->rule('newpass1', 'alpha_numeric');
+        $validation->rule('newpass1', 'matches', array(':validation','newpass1','newpass2'));
+        
+        if(!$validation->check())
+        {
+            $this->errors = $validation->errors('catErrors');
+            return FALSE;
+        }
+        
+        $auth = Auth::instance();
+        $user_id = $auth->get_user();
+        $usertemp = ORM::factory('myuser', array('id' => $user_id));
+        $usertemp->password = $auth->hash($newpass1);
+        $usertemp->save();
+        
+        return TRUE;
+    }
+    
+    public function getErrors(){
+        return $this->errors;
+    }
 
 }
+ 

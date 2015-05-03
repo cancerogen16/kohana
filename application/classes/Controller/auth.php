@@ -95,7 +95,7 @@ class Controller_Auth extends Controller_Template {
         }
         $this->template->logged = $logged;
     }
-
+    
     public function action_checkcode() {
 
         $code = $this->request->param('id');
