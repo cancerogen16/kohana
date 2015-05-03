@@ -75,6 +75,26 @@ class Controller_Auth extends Controller_Template {
         $this->template->logged = Auth::instance()->logged_in();
         $this->template->content = View::factory('rempassview', $data);
     }
+    
+    public function action_form() {
+        if($this->request->is_initial())
+        {
+            throw HTTP_Exception::factory(404, 'Файл не найден!');
+        }
+        
+        $this->auto_render = FALSE;
+        
+        $logged = Auth::instance()->logged_in();
+        if($logged)
+        {
+            $this->response->body(View::factory('authformlogoutview'));
+        }
+        else 
+        {
+            $this->response->body(View::factory('authformloginview'));
+        }
+        $this->template->logged = $logged;
+    }
 
     public function action_checkcode() {
 
@@ -96,6 +116,7 @@ class Controller_Auth extends Controller_Template {
     public function action_hpass() {
         $auth = Auth::instance();
         $hash = $auth->hash_password('admin');
+        $this->template->logged = Auth::instance()->logged_in();
         $this->template->content = $hash;
     }
 

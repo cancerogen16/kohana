@@ -15,7 +15,7 @@ class Mycontroller extends Controller_Template {
         $logged = $auth->logged_in(); 
         $this->logged = $logged;
         if ($logged == 0) {
-            HTTP::redirect('auth');
+            //HTTP::redirect('auth');
         }
         return parent::before();
     }

@@ -11,18 +11,23 @@
 
         <div id="container">
             <div id="header">
+<?php  
+$request = Request::factory("/auth/form/");
+$response = $request->execute();
+echo $response;
+?>
                 <h1>Образовательная система</h1>
                 <a href="/">Главная</a>
-            <?php if($logged){ ?>   
-                <a href="/auth/logout">Выйти</a>
-            <?php } else { ?>
-                <a href="/auth/">Войти</a>
-                <a href="/auth/hochuvspomnit/">Вспоминаем пароль</a>
-            <?php } ?>    
+                <?php if ($logged) { ?>   
+                    <a href="/auth/logout/">Выйти</a>
+                <?php } else { ?>
+                    <a href="/auth/">Войти</a>
+                    <a href="/auth/hochuvspomnit/">Вспоминаем пароль</a>
+                <?php } ?>    
                 <a href="/admin/main/">Админка</a>
                 <a href="/auth/reg/">Регистрация</a>
                 <a href="/auth/hpass/">Создать пароль</a>
-                
+
                 <!-- end .header -->
             </div>
             <div id="content">
