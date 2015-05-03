@@ -95,8 +95,20 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	text-align:center;
 }
 
-
-
+table.login{
+    position: relative;
+}
+#trueimg,#falseimg{
+    width:48px;
+    height:48px;
+    display: none;
+}
+#trueimg{
+background: url(../img/true.png) 0 0 no-repeat;
+}
+#falseimg{
+background: url(../img/false.png) 0 0 no-repeat;
+}
 
 /* ~~ miscellaneous float/clear classes ~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */

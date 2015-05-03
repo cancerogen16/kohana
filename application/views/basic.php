@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Образовательная система</title>
         <link href="/css/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
     </head>
 
     <body>
@@ -11,12 +12,17 @@
         <div id="container">
             <div id="header">
                 <h1>Образовательная система</h1>
-                <a href="/auth/">Войти</a>
+                <a href="/">Главная</a>
+            <?php if($logged){ ?>   
                 <a href="/auth/logout">Выйти</a>
+            <?php } else { ?>
+                <a href="/auth/">Войти</a>
+                <a href="/auth/hochuvspomnit/">Вспоминаем пароль</a>
+            <?php } ?>    
                 <a href="/admin/main/">Админка</a>
                 <a href="/auth/reg/">Регистрация</a>
                 <a href="/auth/hpass/">Создать пароль</a>
-                <a href="/auth/hochuvspomnit/">Вспоминаем пароль</a>
+                
                 <!-- end .header -->
             </div>
             <div id="content">

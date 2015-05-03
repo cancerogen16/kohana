@@ -9,8 +9,8 @@ class Controller_Auth extends Controller_Template {
     public function action_index() {
         $auth = Auth::instance();
         $data = array();
-
-        if ($auth->logged_in()) {
+        $logged = $auth->logged_in();
+        if ($logged) {
             HTTP::redirect();
         } else {
             $btnsubmit = filter_input(INPUT_POST, "btnsubmit", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -29,7 +29,7 @@ class Controller_Auth extends Controller_Template {
                 }
             }
         }
-
+        $this->template->logged = $logged;
         $this->template->content = View::factory('authview', $data);
     }
 
@@ -49,6 +49,8 @@ class Controller_Auth extends Controller_Template {
                 $data["errors"] = $register->errors;
             }
         }
+
+        $this->template->logged = Auth::instance()->logged_in();
 
         $this->template->content = View::factory('regview', $data);
     }
@@ -70,36 +72,41 @@ class Controller_Auth extends Controller_Template {
             }
         }
 
+        $this->template->logged = Auth::instance()->logged_in();
         $this->template->content = View::factory('rempassview', $data);
     }
-	
+
     public function action_checkcode() {
-        
+
         $code = $this->request->param('id');
         $data = array();
-        
-        $register = new Model_register();
-		
-		if ($register->obnovlenieparolia($code)) {
-			$data["ok"] = "";	
-		} else {
-			$data["error"] = "";	
-		}
 
+        $register = new Model_register();
+
+        if ($register->obnovlenieparolia($code)) {
+            $data["ok"] = "";
+        } else {
+            $data["error"] = "";
+        }
+        
+        $this->template->logged = Auth::instance()->logged_in();
         $this->template->content = View::factory('checkcodeview', $data);
     }
 
     public function action_hpass() {
         $auth = Auth::instance();
         $hash = $auth->hash_password('admin');
-
         $this->template->content = $hash;
     }
 
     public function action_logout() {
         $auth = Auth::instance();
+        $logged = $auth->logged_in();
+
         $auth->logout();
+        
         $this->template->content = "Разлогинились";
+        $this->template->logged = $logged;
     }
 
 }
