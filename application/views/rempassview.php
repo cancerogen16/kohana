@@ -1,10 +1,10 @@
 <p style="text-align:center">Введите адрес эл. почты.</p>
-<? if(isset($error)){?>
+<?php if(isset($error)){?>
 <p style="color:red; text-align:center">Адрес эл. почты не найден.</p>
-<?}?>
-<? if(isset($ok)){?>
+<?php } ?>
+<?php if(isset($ok)){?>
 <p style="color:green; text-align:center">Проверьте вашу эл. почту.</p>
-<?}?>
+<?php } ?>
 <div style="margin: 20px auto;width:300px;">
     <form action="" method="post">
         <table class="login">

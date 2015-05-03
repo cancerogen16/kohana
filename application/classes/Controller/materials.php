@@ -14,7 +14,9 @@ class Controller_Materials extends Mycontroller {
         
         $category_id = $category->getCategoryIdByUrl($url);
         if(!$category_id) {
-            HTTP::redirect();
+            //throw new HTTP_Exception_404(':file не найден.', array(':file' => 'Имя файла'));
+            throw HTTP_Exception::factory(404, 'Запрашиваемая категория не найдена!');
+            $this->template->content = View::factory('404view', $data);
         }
         
         $data['materials'] = $materials->getMaterialsByCategory($category_id);

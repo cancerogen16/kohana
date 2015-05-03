@@ -82,7 +82,7 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
-Kohana::$environment = Kohana::DEVELOPMENT;
+//Kohana::$environment = Kohana::DEVELOPMENT;
 if (isset($_SERVER['KOHANA_ENV']))
 {
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
@@ -105,6 +105,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
+        'errors' => TRUE,
 	'index_file' => FALSE
 ));
 
@@ -148,7 +149,7 @@ Cookie::$salt = 'dfbjih9875ehd';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
- 
+
 Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'directory'  => 'admin',
@@ -161,3 +162,5 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 		'controller' => 'main',
 		'action'     => 'index',
 	));
+
+//set_exception_handler(array('Exceptionhandler', 'handle'));
