@@ -24,6 +24,16 @@ class Controller_Admin_Main extends Mycontrolleradmin {
             }
         }
         
+        $materialsavebtn = filter_input(INPUT_POST, "materialsavebtn", FILTER_SANITIZE_SPECIAL_CHARS);
+        if($materialsavebtn){
+            $categoryId = filter_input(INPUT_POST, "categoryId", FILTER_SANITIZE_SPECIAL_CHARS);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_SPECIAL_CHARS);
+            
+            $material = ORM::factory('material');
+            $material->add_material($categoryId, $content);
+            HTTP::redirect('admin');
+        }
+        
         $this->template->logged = $this->logged;
         $view = View::factory('admin/mainview', $data);
         $this->template->content = $view;

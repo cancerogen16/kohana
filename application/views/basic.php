@@ -5,6 +5,7 @@
         <title>Образовательная система</title>
         <link href="/css/style.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
     </head>
 
     <body>
