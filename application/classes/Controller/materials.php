@@ -23,6 +23,23 @@ class Controller_Materials extends Mycontroller {
         $this->template->logged = $this->logged;
         $this->template->content = View::factory('materialsview', $data);
     }
+    
+    public function action_showcontent() {
+        
+        $content_id = $this->request->param('id');
+        
+        $materials = new Model_Material();
+        
+        $data = $materials->show_material_by_id($content_id);
+        
+        if(!$data) {
+            throw HTTP_Exception::factory(404, 'Запрашиваемый материал не найден!');
+            return;
+        }
+        
+        $this->template->logged = $this->logged;
+        $this->template->content = View::factory('contentview', $data);
+    }
 
 }
 
